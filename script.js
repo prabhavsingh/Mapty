@@ -51,7 +51,7 @@ class Cycling extends Workout {
   }
 
   calcSpeed() {
-    this.speed = this.distanceduration / (this.distance / 60);
+    this.speed = this.duration / (this.distance / 60);
     return this.speed;
   }
 }
@@ -112,7 +112,7 @@ class App {
       inputDuration.value =
       inputElevation.value =
         "";
-    form.computedStyleMap.display = "none";
+    form.style.display = "none";
     form.classList.add("hidden");
     setTimeout(() => (form.style.display = "grid"), 1000);
   }
@@ -284,7 +284,7 @@ class App {
   }
 
   reset() {
-    localStorage.removeItem("workout");
+    localStorage.removeItem("workouts");
     location.reload();
   }
 }
