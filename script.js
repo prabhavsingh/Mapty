@@ -62,7 +62,7 @@ class App {
   #map;
   #mapZoomLevel = 13;
   #mapEvent;
-  #workout = [];
+  #workouts = [];
   constructor() {
     this._getPosition();
     this._getLocalStoage();
@@ -94,7 +94,7 @@ class App {
     }).addTo(this.#map);
 
     this.#map.on("click", this._showForm.bind(this));
-    this.#workout.forEach((work) => {
+    this.#workouts.forEach((work) => {
       this._renderWorkoutMarker(work);
     });
   }
@@ -166,7 +166,7 @@ class App {
     }
 
     //add new object to workout array
-    this.#workout.push(workout);
+    this.#workouts.push(workout);
 
     //render workout on map as marker
     this._renderWorkoutMarker(workout);
@@ -255,7 +255,7 @@ class App {
 
     if (!workoutEl) return;
 
-    const workout = this.#workout.find(
+    const workout = this.#workouts.find(
       (work) => work.id === workoutEl.dataset.id
     );
 
@@ -268,17 +268,17 @@ class App {
   }
 
   _setLocalStorage() {
-    localStorage.setItem("workouts", JSON.stringify(this.#workout));
+    localStorage.setItem("workouts", JSON.stringify(this.#workouts));
   }
 
   _getLocalStoage() {
-    const data = JSON.stringify(localStorage.getItem("workout"));
+    const data = JSON.parse(localStorage.getItem("workouts"));
 
     if (!data) return;
 
-    this.#workout = data;
+    this.#workouts = data;
 
-    this.#workout.forEach((work) => {
+    this.#workouts.forEach((work) => {
       this._renderWorkout(work);
     });
   }
